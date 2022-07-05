@@ -5,6 +5,7 @@ const { PORT } = require("./config")
 const { NotFoundError } = require("./utils/errors")
 const authRoutes = require("./routes/auth")
 
+
 const app = express()
 
 // enable cross-origin resource sharing for all origins for all requests
