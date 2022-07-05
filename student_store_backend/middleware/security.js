@@ -16,4 +16,32 @@ return undefined
 }
 
 
-const extractUserFromJwt = (req,res,next) =>{}
+const extractUserFromJwt = (req,res,next) =>{
+try{
+ const token =  jwtFrom(req)
+ if (token) {
+   res.locals.user = jwt.verify (token, SECRET_KEY) 
+
+ }
+ return next()
+} catch (error) {
+  return next()
+ 
+}
+}
+
+const requireAuthenticatedUser = (req, res, next) =>{
+try{
+ const {user} = res.locals
+ if (user?.email) {
+    throw new UnauthorizedError()
+ }
+} catch (error) {
+ return next(error)   
+    }
+module.exports = {
+    requireAuthenticatedUser,
+    extractUserFromJwt,
+}
+
+}

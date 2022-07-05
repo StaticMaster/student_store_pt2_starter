@@ -26,11 +26,13 @@ created_at   TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE order_details (
-order_id     INTEGER NOT NULL REFERENCES id (orders),
-product_id   INTEGER NOT NULL REFERENCES id (products),
+order_id     INTEGER NOT NULL,
+product_id   INTEGER NOT NULL,
 quantity     INTEGER NOT NULL DEFAULT 1,
-discount     INTEGER NOT NULL
-PRIMARY KEY (order_id, product_id)
+discount     INTEGER NOT NULL,
+PRIMARY KEY (order_id, product_id),
+FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
 
